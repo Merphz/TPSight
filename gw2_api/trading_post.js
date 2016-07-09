@@ -6,19 +6,10 @@
 
 'use strict';
 const https = require('https');
+const api = require('./api_config');
 
+const maxConnections = 300;
 const rootEndpoint = '/v2/commerce/listings'; // prevent exhausting all connections
-
-const timeout = 60 * 10000; // 1 min
-
-var options = {
-  hostname: 'api.guildwars2.com',
-  port: 443,
-  path: '/',
-  method: 'GET'
-};
-
-const maxConnections = 800;
 
 let currentConnections = 0;
 
@@ -39,6 +30,7 @@ var nextQueue = function () {
 var _getListings = function (itemId, callback) {
   currentConnections += 1;
 
+  let options = api.options;
   options.path = rootEndpoint + '/' + itemId;
 
   var req = https.request(options, function (res) {
@@ -68,6 +60,7 @@ var _getListings = function (itemId, callback) {
 };
 
 var getItemIds = function (callback) {
+  let options = api.options;
   options.path = rootEndpoint;
 
   var req = https.request(options, function (res) {
