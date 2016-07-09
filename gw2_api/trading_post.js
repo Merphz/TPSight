@@ -18,7 +18,7 @@ var options = {
   method: 'GET'
 };
 
-const maxConnections = 300;
+const maxConnections = 400;
 
 let currentConnections = 0;
 

@@ -58,12 +58,12 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(80, function () {
+/*app.listen(80, function () {
   console.log('Listening on port ' + 80 + '!');
+});*/
 
-  var scanner = new Scanner();
-  scanner.start();
-});
+const scanner = new Scanner();
+scanner.start();
 
 
 module.exports = app;
